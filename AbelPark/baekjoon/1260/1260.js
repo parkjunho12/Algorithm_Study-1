@@ -1,11 +1,21 @@
-// 입력값 세팅
-var fs = require("fs")
-var txt = fs.readFileSync("1260.txt").toString().split("\n")
-var raw = txt
-var data = []
-for (let i = 0; i < raw.length; i++) {
-  data[i] = raw[i].replace("\r", "").split(" ").map(Number)
-}
+// 터미널 입력
+const readline = require("readline")
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
+let data = []
+
+rl.on("line", (line) => {
+  data.push(line.split(" ").map((el) => parseInt(el)))
+})
+
+rl.on("close", () => {
+  console.log(data)
+  process.exit()
+})
 
 // 로직 풀이
 var V = data[0][2]
@@ -19,10 +29,12 @@ data.splice(0, 1)
 // 2. 간선 연결값 정렬
 // 2-1 2차원 배열간
 data.forEach((D1) => {
-  D1.sort()
+  D1.sort((a, b) => a - b)
 })
 // 2-2 1차원 배열간
 data.sort((a, b) => a[0] + a[1] - (b[0] + b[1]))
+// data.sort((a, b) => a[1] - b[1])
+// data.sort((a, b) => a[0] - b[0])
 
 // 2-3 2차원 배열 중첩 !제거 할필요 없음!
 // let data = data.filter((element, index) => {
@@ -89,11 +101,9 @@ function BFS(p) {
   }
 }
 
-// DFS(V)
-BFS(V)
+DFS(V)
+// BFS(V)
 
 console.log("정점의 번호" + V)
 console.log("스택" + stack)
 console.log("탐색순서" + result)
-
-console.log(result.toString().replace(",", " "))
