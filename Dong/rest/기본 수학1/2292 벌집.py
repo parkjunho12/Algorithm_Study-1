@@ -17,16 +17,19 @@
 # 예제 출력 1 
 # 3
 
+import sys
+
 N = int(input())
+
+if N == 1 :
+    print(N)
+    sys.exit(0)
 
 def bee(n) :
     return 3 * n * n - 3 * n + 1
 
 x = 2
 while True :
-    if N == 1 :
-        print(N)
-        break
     if bee(x) - N >= 0 :
         print(x)
         break
