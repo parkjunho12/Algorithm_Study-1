@@ -45,6 +45,8 @@ for _ in range(M) :
 for g in graph :
     g.sort()
 
+print(graph)
+
 d1check = [False for _ in range(N + 1)]
 cnt1 = 0
 
@@ -53,8 +55,8 @@ def dfs1(x) :
     d1check[x] = True
     for y in graph[x] :
         if not d1check[y] :
-            dfs1(y)
             cnt1 += 1
+            dfs1(y)
     return cnt1
 
 d2check = [False for _ in range(N + 1)]
@@ -68,7 +70,7 @@ def dfs2() :
         if not d2check[z] :
             cnt2 += 1
             d2check[z] = True
-            stack.extend(reversed(graph[z]))
+            stack.extend(reversed(graph[z])) # stack에 graph[z]의 원소를 넣는데, 큰 원소를 먼저 넣어서 stack.pop()에서 작은 원소 부터 빼기 위함
     return cnt2 - 1
 
 bcheck = [False for _ in range(N + 1)]
