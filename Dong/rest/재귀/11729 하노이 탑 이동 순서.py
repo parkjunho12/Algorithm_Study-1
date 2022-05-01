@@ -35,9 +35,17 @@
 
 N = int(input())
 
-def Hanoi(n) :
+def Hanoi(n, start, end) :
     if n == 1 :
-        return 1
-    return 2 * Hanoi(n - 1) + 1
+        print(start, end)
+        return
+    Hanoi(n - 1, start, 6 - start - end)
+    print(start, end)
+    Hanoi(n - 1, 6 - start - end, end)
 
-print(Hanoi(N))
+sum = 0
+for _ in range(N) :
+    sum = 2 * sum + 1
+
+print(sum)
+Hanoi(N, 1, 3)
