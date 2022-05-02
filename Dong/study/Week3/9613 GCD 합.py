@@ -22,14 +22,20 @@
 # 35
 
 import sys
-import math
 
 T = int(sys.stdin.readline())
 
+def gcd(x, y) :
+    a = max(x, y)
+    b = min(x, y)
+    if a % b == 0 :
+        return b
+    return gcd(b, a % b)
+
 for _ in range(T) :
-    gcd = []
+    result = []
     case = list(map(int, sys.stdin.readline().split()))
     for i in range(1, case[0] + 1) :
         for j in range(i + 1, case[0] + 1) :
-            gcd.append(math.gcd(case[i], case[j]))
-    print(sum(gcd))
+            result.append(gcd(case[i], case[j]))
+    print(sum(result))

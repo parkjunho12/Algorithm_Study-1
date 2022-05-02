@@ -111,12 +111,32 @@
 import sys
 
 
-N, M = map(int, sys.stdin.readline().split())
+M, N = map(int, sys.stdin.readline().split())
 
 chess = []
 
-for i in range(N) :
+result = []
+
+for i in range(M) :
     row = sys.stdin.readline().strip()
     chess.append(row)
 
-print(chess)
+for i in range(M - 7) :
+    for j in range(N - 7) :
+        start_W = 0
+        start_B = 0
+        for k in range(i, i + 8) :
+            for l in range(j, j + 8) :
+                if (k + l) % 2 == 0 :
+                    if chess[k][l] == "W" :
+                        start_W += 1
+                    else :
+                        start_B += 1
+                else :
+                    if chess[k][l] == "W" :
+                        start_B += 1
+                    else :
+                        start_W += 1
+        result.append(start_B)
+        result.append(start_W)
+print(min(result))
