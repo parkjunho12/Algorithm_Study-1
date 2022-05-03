@@ -1,27 +1,38 @@
-// var fs = require("fs")
-// var txt = fs.readFileSync("1260.txt").toString().split("\n")
-// var raw = txt
-// var data = []
-// for (let i = 0; i < raw.length; i++) {
-//   data[i] = raw[i].replace("\r", "").split(" ").map(Number)
-// }
-let array = [10, 20, 30, 40]
-let arrayBundle = []
+const readline = require("readline")
 
-function GCD(num) {
-  let i = 1
-  let quotient = []
-  for (let i = 1; i <= Math.floor(num / 2); i++) {
-    if (num % i === 0) {
-      quotient.push(i)
-    }
-  }
-  return quotient
-}
-
-array.forEach((ele) => {
-  arrayBundle.push(GCD(ele))
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 })
 
-let aa = arrayBundle[0].filter((x) => arrayBundle[1].includes(x))
-let rr = Math.max(...aa)
+let input = []
+
+function GCD(a, b) {
+  const remainder = a % b
+  if (remainder === 0) return b
+  return GCD(b, remainder)
+}
+
+function solution(array) {
+  array.shift()
+  array.sort()
+  let result = 0
+  for (let j = 0; j < array.length - 1; j++) {
+    for (let i = j + 1; i < array.length; i++) {
+      result = result + GCD(array[j], array[i])
+    }
+  }
+  console.log(result)
+}
+
+rl.on("line", (line) => {
+  input.push(line.split(" ").map((el) => parseInt(el)))
+})
+
+rl.on("close", () => {
+  input.shift()
+  input.forEach((element) => {
+    solution(element)
+  })
+  process.exit()
+})
