@@ -43,7 +43,7 @@ for i in range(len(nums)) :
 for num in nums :
     print(num)
 
-# # Insert Sort
+# # Insertion Sort
 # for i in range(1, len(nums)) :
 #     while i > 0 and nums[i] < nums[i - 1] :
 #         nums[i - 1], nums[i] = nums[i], nums[i - 1]
