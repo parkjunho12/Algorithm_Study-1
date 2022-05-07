@@ -2,6 +2,7 @@ package Study.Week4
 
 import java.util.*
 
+var answer = 0
 fun main() = with(Scanner(System.`in`)) {
     val rowCount = nextInt()
 
@@ -19,25 +20,5 @@ fun main() = with(Scanner(System.`in`)) {
     }
 
 
-
-    for (i in zooArr.indices) {
-        for (j in zooArr.indices) {
-            BFS(Direction(i, j))
-        }
-    }
+    println(answer)
 }
-
-private fun BFS(direction: Direction) {
-    val zooQueue: Queue<Direction> = LinkedList()
-    zooQueue.add(direction)
-    while (zooQueue.isNotEmpty()) {
-        val curDirection = zooQueue.poll()
-        val curX = curDirection.x
-        val curY = curDirection.y
-
-
-
-    }
-}
-
-data class Direction(val x: Int,val y: Int)
