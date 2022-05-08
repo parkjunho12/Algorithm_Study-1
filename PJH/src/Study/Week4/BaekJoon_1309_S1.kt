@@ -2,23 +2,20 @@ package Study.Week4
 
 import java.util.*
 
-var answer = 0
+private const val MOD = 9901
 fun main() = with(Scanner(System.`in`)) {
     val rowCount = nextInt()
 
-    val zooArr: Array<IntArray> = Array<IntArray>(rowCount) {
-        IntArray(2) {
-            0
-        }
+    val zooArr: IntArray = IntArray(rowCount + 1) {
+        0
+    }.apply {
+        set(0, 1)
+        set(1, 3)
     }
 
-    zooArr.forEach {
-        it.forEach {
-            print ("$it ")
-        }
-        println()
+    for (i in 2..rowCount) {
+        zooArr[i] = (zooArr[i-1]*2 + zooArr[i-2]) % MOD
     }
 
-
-    println(answer)
+    print(zooArr[zooArr.lastIndex])
 }
