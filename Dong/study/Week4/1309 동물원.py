@@ -22,3 +22,26 @@
 # 예제 출력 1 
 # 41
 
+# a(n) = a(n-1) + {(a(n-1) - a(n-2)) / 2 + a(n-2)} x 2
+# a(n) = 2a(n-1) + a(n-2)
+
+N = int(input())
+
+n = 2
+answer = 0
+x = 3
+y = 7
+
+if N == 1 :
+    answer = 3
+if N == 2 :
+    answer = 7
+if N == 3 :
+    answer = 17
+
+while n < N and N > 3 :
+    answer = y * 2 + x * 1
+    x, y = y, answer
+    n += 1
+
+print(answer % 9901)
