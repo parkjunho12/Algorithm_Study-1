@@ -40,8 +40,10 @@ if N == 3 :
     answer = 17
 
 while n < N and N > 3 :
-    answer = y * 2 + x * 1
+    answer = (y * 2 + x * 1) % 9901
     x, y = y, answer
     n += 1
 
-print(answer % 9901)
+print(answer)
+
+# (A + B) % C = (A % C + B % C) % C
