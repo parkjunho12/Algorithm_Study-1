@@ -16,6 +16,7 @@ rl.on("line", line => {
 
 rl.on("close", () => {
 	const dp = new Array(input + 1).fill(0)
+	// dp[i]는 숫자i에 대한 횟수 최소값이다. 고로 식 지날 때마다 +1(경우의수) 해준다.
 	for(let i = 2; i < dp.length; i++) {
 		console.log(`===== ${i} =====`)
 		dp[i] = dp[i - 1] + 1
