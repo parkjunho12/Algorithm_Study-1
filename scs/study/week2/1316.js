@@ -18,29 +18,24 @@ const groupWord = input => {
 		const word = input[i]
 		const letter = []
 		let flagGroupWord = true
-		console.log(`--- word ${word} ---`)
+		console.log(`--- word : ${word} ---`)
 
 		for(let j = 0; j < word.length; j++) {
 			if(letter.indexOf(word[j]) === -1) {
-				// letter 배열 안에 word 단어 하나도 포함 안하는 경우
+				// letter 배열 안에 word[j] 단어 하나도 포함 안하는 경우
 				letter.push(word[j])
 			} else {
-				console.log(word[j - 1], word[j], letter.indexOf(word[j]), letter.length - 1)
-				// letter 배열 안에 단어 있을때
-				// 단어 연속해서 안나오는 경우
-				if(letter.indexOf(word[j]) !== letter.length - 1) {
+				// letter 배열 안에 word[j] 있을때
+				console.log(j, word[j], letter.indexOf(word[j]), letter[letter.length - 1], letter.length - 1)
+				if(letter.indexOf(word[j]) !== letter.length - 1) { // 단어 연속해서 안나오는 경우
 					flagGroupWord = false
-					console.log("--- break ---")
 					break
 				}
 			}
 		}
-		console.log("--- letter ---")
-		console.log(letter)
 		
 		if(flagGroupWord) countGroupWord += 1
 	}
 
-	console.log("--- countGroupWord ---")
 	console.log(countGroupWord)
 }
