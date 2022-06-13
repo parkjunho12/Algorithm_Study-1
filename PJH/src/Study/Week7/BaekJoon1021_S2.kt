@@ -99,42 +99,33 @@ fun main() = with(Scanner(System.`in`)) {
             val dirY = direction[1].toInt()
             field[dirX][dirY] = 1
         }
-
-        val fieldQueue: Queue<IntArray> = LinkedList()
-        fieldQueue.add(intArrayOf(0,0))
-        while (fieldQueue.isNotEmpty()) {
-            val fieldDir = fieldQueue.poll()
-            directions.forEach { direction ->
-                if (fieldDir[0] + direction[0] in 0 until sizeX && fieldDir[1] + direction[1] in 0 until sizeY && !visited[fieldDir[0] + direction[0]][fieldDir[1] + direction[1]]) {
-                    if (field[fieldDir[0] + direction[0]][fieldDir[1] + direction[1]] == 1) {
-                        answer++
-                        val searchQueue: Queue<IntArray> = LinkedList()
-                        searchQueue.add(intArrayOf(fieldDir[0] + direction[0], fieldDir[1] + direction[1]))
-                        while (searchQueue.isNotEmpty()) {
-                            val searchDir = searchQueue.poll()
-                            visited[searchDir[0]][searchDir[1]] = true
-                            directions.forEach {
+        for (i in field.indices) {
+            for (j in field[i].indices) {
+                if (!visited[i][j] && field[i][j] == 1) {
+                    answer++
+                    val searchQueue: Queue<IntArray> = LinkedList()
+                    searchQueue.add(intArrayOf(i, j))
+                    while (searchQueue.isNotEmpty()) {
+                        val searchDir = searchQueue.poll()
+                        directions.forEach {
                                 subDirection ->
-                                if (searchDir[0] + subDirection[0] in 0 until sizeX && searchDir[1] + subDirection[1] in 0 until sizeY) {
-                                    if (!visited[searchDir[0] + subDirection[0]][searchDir[1] + subDirection[1]] && field[searchDir[0] + subDirection[0]][searchDir[1] + subDirection[1]] == 1) {
-                                        searchQueue.add(
-                                            intArrayOf(
-                                                searchDir[0] + subDirection[0],
-                                                searchDir[1] + subDirection[1]
-                                            )
+                            if (searchDir[0] + subDirection[0] in 0 until sizeX && searchDir[1] + subDirection[1] in 0 until sizeY) {
+                                if (!visited[searchDir[0] + subDirection[0]][searchDir[1] + subDirection[1]] && field[searchDir[0] + subDirection[0]][searchDir[1] + subDirection[1]] == 1) {
+                                    visited[searchDir[0] + subDirection[0]][searchDir[1] + subDirection[1]] = true
+                                    searchQueue.add(
+                                        intArrayOf(
+                                            searchDir[0] + subDirection[0],
+                                            searchDir[1] + subDirection[1]
                                         )
-                                    }
+                                    )
                                 }
                             }
                         }
-
-                    } else{
-                        visited[fieldDir[0]+ direction[0]][fieldDir[1]+ direction[1]] = true
-                        fieldQueue.add(intArrayOf(fieldDir[0] + direction[0], fieldDir[1] + direction[1]))
                     }
                 }
             }
         }
+
         answerArr.add(answer)
     }
     answerArr.forEach {
